@@ -1,6 +1,6 @@
 #include<detection_pnp.h>
 
-namespace {
+namespace armor_detection{
     void detection_pnp::loadParam(const cv::Mat &cameraMatrix, const cv::Mat &distCoeffs){
         this->cameraMatrix = cameraMatrix;
         this->distCoeffs = distCoeffs;

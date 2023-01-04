@@ -4,7 +4,7 @@
 #include<opencv2\opencv.hpp>
 #include<vector>
 
-namespace{
+namespace armor_detection{
     class detection_pnp{
     public:
         void loadParam(const cv::Mat &cameraMatrix, const cv::Mat &distCoeffs);
