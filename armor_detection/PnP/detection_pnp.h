@@ -10,6 +10,7 @@ namespace{
         void loadParam(const cv::Mat &cameraMatrix, const cv::Mat &distCoeffs);
         void solvePNP(const std::vector<cv::Point3d> &, const std::vector<cv::Point2d> &, cv::Mat &, cv::Mat &);
         void get3DPoint(const std::vector<cv::Point3d> &, const cv::Mat &, const cv::Mat &, std::vector<cv::Point3d> &);
+        void getangle(const cv::Point3d &, double &,double &,double &);
 
     private:
         cv::Mat cameraMatrix, distCoeffs;//相机内参与畸变参数

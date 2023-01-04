@@ -32,4 +32,15 @@ namespace {
         }
     }
 
+    void getangle(const cv::Point3d &point, double &xAngle,double &yAngle,double &zAngle){
+        double tan_x, tan_y, tan_z;
+        tan_x = point.y / point.x;
+        tan_y = point.x / point.y;
+        tan_z = point.z / std::sqrt(point.x * point.x + point.y * point.y);
+
+        xAngle = std::atan(tan_x);
+        yAngle = std::atan(tan_y);
+        zAngle = std::atan(tan_z);
+    }
+
 }
