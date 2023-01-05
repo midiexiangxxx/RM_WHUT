@@ -39,24 +39,24 @@ namespace armor_detection {
             this->armor_area_max = armor_area_max;
         }
         else if(enermy_color == ENERMY_COLOR_BLUE){
-            // init
+           // init
             this->alpha = 1, this->beta = 50;
             this->thresh_value = 180;
             
             // light
             this->light_bit_min = 13;
-            this->light_bit_max = 25;
-            this->light_angle_min = -17;
-            this->light_angle_max = 17; 
+            this->light_bit_max = 30;
+            this->light_angle_min = -100;
+            this->light_angle_max = 100; 
             this->light_area_min = 100;
-            this->light_area_max = 10000;
-            this->light_angle_abs = 4;
+            this->light_area_max = 1500;
+            this->light_angle_abs = 10;
 
             // armor 
-            this->armor_bit_min = 0.3552;
-            this->armor_bit_max = 0.7552;
-            this->armor_area_min = armor_area_min;
-            this->armor_area_max = armor_area_max;
+            this->armor_bit_min = 30;
+            this->armor_bit_max = 60;
+            this->armor_area_min = 0;
+            this->armor_area_max = 10000;
         }
         else{
             // init
