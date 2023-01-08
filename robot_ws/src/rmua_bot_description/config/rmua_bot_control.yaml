@@ -1,0 +1,17 @@
+rmua_robot:
+    # Publish all joint states -----------------------------------
+  rmua_robot_joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50  
+
+  # Position Controllers ---------------------------------------
+  yaw_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: gimbal_yaw_joint
+    pid: {p: 100.0, i: 0.01, d: 0.1}
+  pitch_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: gimbal_pitch_joint
+    pid: {p: 100.0, i: 0.01, d: 0.1}
+
+

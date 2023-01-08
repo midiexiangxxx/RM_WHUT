@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="armor_module">
+  <xacro:macro name="armor_module" params="prefix parant xyz rpy sticker_num">
+    <!--xacro:property name="gripper_side" value="${side[0]}" scope="local"/-->
+    <xacro:property name="pi" value="3.1415926535897931" />
+     <xacro:include filename="$(find models_description)/urdf/rm22_armor_module/armor_support.xacro" />
+     <xacro:armor_support prefix="${prefix}"
+                                  parant="${parant}"
+                                  xyz="${xyz}"
+                                  rpy="${rpy}"/>
+     <xacro:include filename="$(find models_description)/urdf/rm22_armor_module/small_armor.xacro" />
+     <xacro:small_armor prefix="${prefix}"
+                                  parant="${prefix}_armor_support"
+                                  xyz="0.075 0 -0.071"
+                                  rpy="0 -0.262 0"
+                                  sticker_num="${sticker_num}"
+                                  />
+  </xacro:macro>
+</robot>

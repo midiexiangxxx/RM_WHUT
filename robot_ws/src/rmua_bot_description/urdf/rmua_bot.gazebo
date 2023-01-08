@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<gazebo>
+  <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+    <robotNamespace>ruma_robot</robotNamespace>
+    <controlPeriod>0.01</controlPeriod>
+    <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+    <legacyModeNS>true</legacyModeNS>
+  </plugin>
+</gazebo>

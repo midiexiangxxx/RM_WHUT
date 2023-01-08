@@ -1,0 +1,10 @@
+recovery_info {
+    shrink_horizon_backup: True                   #shrink_horizon_backup (bool, default: true) 允许规划器在自动检测到问题(e.g. infeasibility)的情况下临时缩小horizon（50％）
+    shrink_horizon_min_duration: 10               #shrink_horizon_min_duration (double, default: 10.0) 指定最低持续时间减少地平线以备不可行轨迹检测
+    oscillation_recovery: true
+    oscillation_v_eps: 0.1
+    oscillation_omega_eps: 0.1
+    oscillation_recovery_min_duration: 10
+    oscillation_filter_duration: 10
+}
+

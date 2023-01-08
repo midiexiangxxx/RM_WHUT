@@ -1,0 +1,2 @@
+models_description:nexus_4wd_mecanum_description:nexus_4wd_mecanum_gazebo:rmua_bot_description:roborts:roborts_base:roborts_bringup:roborts_camera:roborts_common:roborts_costmap:roborts_decision:roborts_detection:roborts_localization:roborts_msgs:roborts_planning:roborts_tracking
+-DCATKIN_DEVEL_PREFIX=/home/wk/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/wk/catkin_ws/install -G Unix Makefiles

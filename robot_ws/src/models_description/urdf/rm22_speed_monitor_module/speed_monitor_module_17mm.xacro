@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="speed_monitor_module_17mm">
+  <xacro:macro name="speed_monitor_module_17mm" params="suffix parant xyz rpy">
+     <!--  -->
+    <joint name="speed_monitor_joint_${suffix}" type="fixed">
+      <origin xyz="${xyz}" rpy="${rpy}" />
+      <parent link="${parant}"/>
+      <child link="speed_monitor_${suffix}" />
+    </joint>
+    <link name="speed_monitor_${suffix}">
+      <visual >
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry>
+          <mesh filename="package://models_description/meshes/rm22_speed_monitor_module/speed_monitor_17mm.dae"/>
+        </geometry>
+      </visual>
+      <visual >
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry>
+          <mesh filename="package://models_description/meshes/rm22_speed_monitor_module/speed_monitor_17mm_light_bar.dae"/>
+        </geometry>
+      </visual>
+      <collision name="collision">
+        <origin rpy="0 0 0" xyz="0.055 0 0"/>
+        <geometry>
+          <box size="0.11 0.043 0.041"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <origin rpy="0 0 0" xyz="0.055 0.0 0.0"/>
+        <mass value="0.1"/>
+        <inertia ixx="0.00002941666666666667" ixy="0" ixz="0" iyy="0.00011484166666666668" iyz="0" izz="0.00011624166666666668"/>
+      </inertial>
+    </link>
+  </xacro:macro>
+</robot>

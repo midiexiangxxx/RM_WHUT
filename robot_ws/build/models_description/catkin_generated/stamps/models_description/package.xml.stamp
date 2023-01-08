@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package>
+  <name>models_description</name>
+  <version>1.2.0</version>
+  <description>
+    Description of models for Robots from RMUA Robotics.
+    This package contains the URDF and meshes describing these models.
+  </description>
+
+  <maintainer email="support@rethinkrobotics.com">
+    Rethink Robotics Inc.
+  </maintainer>
+  <license>BSD</license>
+  <url type="website">http://sdk.rethinkrobotics.com</url>
+  <url type="repository">
+    https://github.com/RethinkRobotics/baxter_common
+  </url>
+  <url type="bugtracker">
+    https://github.com/RethinkRobotics/baxter_common/issues
+  </url>
+  <author>Rethink Robotics Inc.</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+</package>

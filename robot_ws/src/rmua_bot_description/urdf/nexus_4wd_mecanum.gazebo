@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<robot>
+  <gazebo>
+    <!--<plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/</robotNamespace>
+    </plugin>-->
+
+    <plugin name="nexus_ros_force_based_move" filename="libnexus_ros_force_based_move.so">
+      <commandTopic>cmd_vel</commandTopic>
+      <odometryTopic>odom</odometryTopic>
+      <odometryFrame>odom</odometryFrame>
+      <odometryRate>25.0</odometryRate>
+      <robotBaseFrame>base_footprint</robotBaseFrame>
+      <cmdVelTimeOut>0.25</cmdVelTimeOut>
+      <publishOdometryTf>true</publishOdometryTf>
+      <yaw_velocity_p_gain>1.0</yaw_velocity_p_gain>
+      <x_velocity_p_gain>15.0</x_velocity_p_gain>
+      <y_velocity_p_gain>15.0</y_velocity_p_gain>
+      <max_x_velocity>0.6</max_x_velocity>
+      <max_y_velocity>0.6</max_y_velocity>
+      <max_yaw_velocity>0.5</max_yaw_velocity>
+    </plugin>
+  </gazebo>
+  <!-- <plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
+    <updateRate>100.0</updateRate>
+    <robotNamespace>/</robotNamespace>
+    <leftFrontJoint>front_wheel_l_joint</leftFrontJoint>
+    <rightFrontJoint>front_wheel_r_joint</rightFrontJoint>
+    <leftRearJoint>rear_left_l_joint</leftRearJoint>
+    <rightRearJoint>rear_wheel_r_joint</rightRearJoint>
+    <wheelSeparation>0.4</wheelSeparation>
+    <wheelDiameter>0.215</wheelDiameter>
+    <robotBaseFrame>base_footprint</robotBaseFrame>
+    <torque>20</torque>
+    <topicName>cmd_vel</topicName>
+    <broadcastTF>false</broadcastTF>
+  </plugin> -->
+  <!-- <gazebo>
+    <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
+        <rosDebugLevel>Debug</rosDebugLevel>
+        <publishWheelTF>true</publishWheelTF>
+        <robotNamespace>/</robotNamespace>
+        <publishTf>1</publishTf>
+        <publishWheelJointState>true</publishWheelJointState>
+        <alwaysOn>true</alwaysOn>
+        <updateRate>100.0</updateRate>
+        <legacyMode>true</legacyMode>
+        <leftJoint>front_wheel_l_joint</leftJoint> 
+        <rightJoint>front_wheel_r_joint</rightJoint> 
+        <wheelSeparation> 2</wheelSeparation> 
+        <wheelDiameter> 2</wheelDiameter> 
+        <broadcastTF>1</broadcastTF>
+        <wheelTorque>30</wheelTorque>
+        <wheelAcceleration>1.8</wheelAcceleration>
+        <commandTopic>cmd_vel</commandTopic> 
+        <odometryFrame>odom</odometryFrame> 
+        <odometryTopic>odom</odometryTopic> 
+        <robotBaseFrame>base_footprint</robotBaseFrame> 
+    </plugin>
+</gazebo> -->
+  <!-- All static links get collapsed down to base_link in Gazebo, so that's
+       the one to apply the colour to (in Gazebo 5+). -->
+  <!--gazebo reference="base_footprint">
+    <material>Gazebo/Yellow</material>
+    <gravity>true</gravity>
+  </gazebo-->
+
+  
+
+  <!-- Wheel friction to zero, as movement is handled by applying forces at the body level. -->
+  <gazebo reference="front_wheel_l">
+    <material>Gazebo/Grey</material>
+    <mu1>0.0</mu1>
+    <mu2>0.0</mu2>
+  </gazebo>
+
+  <gazebo reference="front_wheel_r">
+    <material>Gazebo/Grey</material>
+    <mu1>0.0</mu1>
+    <mu2>0.0</mu2>
+  </gazebo>
+
+  <gazebo reference="rear_wheel_l">
+    <material>Gazebo/Grey</material>
+    <mu1>0.0</mu1>
+    <mu2>0.0</mu2>
+  </gazebo>
+
+  <gazebo reference="rear_wheel_r">
+    <material>Gazebo/Grey</material>
+    <mu1>0.0</mu1>
+    <mu2>0.0</mu2>
+  </gazebo>
+
+</robot>

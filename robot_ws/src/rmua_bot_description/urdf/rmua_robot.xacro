@@ -1,0 +1,349 @@
+<?xml version="1.0"?>
+<robot name="rmua_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:property name="PI" value="3.1415926535897931" />
+  <xacro:property name="chassis_mass" value="15" />
+  <xacro:property name="chassis_inertial_x" value="0.36" />
+  <xacro:property name="chassis_inertial_y" value="0.24" />
+  <xacro:property name="chassis_inertial_z" value="0.13" />
+
+  <!-- Import all Gazebo-customization elements, including Gazebo colors -->
+  <!--xacro:include filename="$(find rmua_bot_description)/urdf/rmua_bot.gazebo" /-->
+<gazebo>
+  <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+    <robotNamespace>/rmua_robot</robotNamespace>
+    <controlPeriod>0.001</controlPeriod>
+    <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+    <legacyModeNS>true</legacyModeNS>
+  </plugin>
+</gazebo>
+
+  <link name="base_footprint"></link>
+  <link name="base_link"></link>
+  <joint name="base_footprint_joint" type="fixed">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <parent link="base_footprint"/>
+      <child link="base_link" />
+  </joint>
+  <joint name="base_link_joint" type="fixed">
+    <origin xyz="0 0 0.05" rpy="0 0 0" />
+    <parent link="base_link"/>
+    <child link="chassis" />
+  </joint>
+
+  <!--chassis-->
+  <link name="chassis">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://rmua_bot_description/meshes/chassis_base.dae" />
+      </geometry>
+    </visual>
+    <collision name="chassis_base_collision">
+      <origin xyz="0 0 0.045"/>
+      <geometry>
+        <box size="0.36 0.24 0.13"/>
+      </geometry>
+    </collision>
+    <collision name="chassis_projectile_container_collision">
+      <origin xyz="-0.122 0 0.177" rpy="0 0 0"/>
+      <geometry>
+	<box size="0.1 0.18 0.146"/>
+      </geometry>
+    </collision>
+    <collision name="chassis_fornt_wheel_holder_collision">
+      <origin xyz="0.208 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.055 0.367 0.055"/>
+     </geometry>
+    </collision>
+    <collision name="chassis_rear_wheel_holder_collision">
+      <origin xyz="-0.208 0 0" rpy="0 0 0"/>
+      <geometry>
+	<box size="0.055 0.367 0.055"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <!-- Inertia from CAD model, filled box assumption -->
+      <origin xyz="0 0 0.055" rpy="0 0 0"/>
+      <mass value="${chassis_mass}"/>
+      <inertia
+        ixx="${chassis_mass*(chassis_inertial_y*chassis_inertial_y+chassis_inertial_z*chassis_inertial_z)/12}" 
+        ixy="0" 
+        ixz="0"
+        iyy="${chassis_mass*(chassis_inertial_x*chassis_inertial_x+chassis_inertial_z*chassis_inertial_z)/12}" 
+        iyz="0"
+        izz="${chassis_mass*(chassis_inertial_x*chassis_inertial_x+chassis_inertial_y*chassis_inertial_y)/12}"/>
+    </inertial>
+  </link>
+
+   <!-- Front Left wheel-->
+  <xacro:include filename="$(find rmua_bot_description)/urdf/chassis_wheel_l.xacro" />
+  <xacro:chassis_wheel_l prefix="front"
+                                  parant="chassis"
+                                  xyz="0.207 0.194 0"
+                                  rpy="0 0 0"/>
+  
+  <!-- Rear Left wheel-->
+  <xacro:include filename="$(find rmua_bot_description)/urdf/chassis_wheel_l.xacro" />
+  <xacro:chassis_wheel_l prefix="rear"
+                                  parant="chassis"
+                                  xyz="-0.207 0.194 0"
+                                  rpy="0 0 0"/>
+   <!-- Front Right wheel-->
+  <xacro:include filename="$(find rmua_bot_description)/urdf/chassis_wheel_r.xacro" />
+  <xacro:chassis_wheel_r prefix="front"
+                                  parant="chassis"
+                                  xyz="0.207 -0.194 0"
+                                  rpy="0 0 0"/>
+   <!-- Rear Right wheel-->
+  <xacro:include filename="$(find rmua_bot_description)/urdf/chassis_wheel_r.xacro" />
+  <xacro:chassis_wheel_r prefix="rear"
+                                  parant="chassis"
+                                  xyz="-0.207 -0.194 0"
+                                  rpy="0 0 0"/>
+
+  <!--gimbal yaw-->
+  <joint name="gimbal_yaw_joint" type="continuous">
+    <origin xyz="0 0 0.1376" rpy="0 0 0"/>
+    <parent link="chassis"/>
+    <child link="gimbal_yaw"/>
+    <axis xyz="0 0 1" />
+    <limit effort="150" lower="${-PI/2}" upper="${PI/2}" velocity="${2*PI}"/>
+  </joint>
+  <link name="gimbal_yaw">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <inertial>
+      <origin xyz="0 0 0.06" rpy="0 0 0"/>
+      <mass value="1.0"/>
+      <inertia
+        ixx="0.003033333333333334" 
+        ixy="0" 
+        ixz="0"
+        iyy="0.003033333333333334" 
+        iyz="0"
+        izz="0.0012500000000000002"/>
+    </inertial>			
+    <visual >
+      <geometry>
+         <mesh filename="package://rmua_bot_description/meshes/gimbal_yaw.dae" />
+      </geometry>
+    </visual>
+    <collision >
+      <origin xyz="0 0 0.0885" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.065 0.117 0.117"/>
+      </geometry>
+    </collision>
+  </link>
+  <!--gimbal pitch-->
+  <joint name="gimbal_pitch_joint" type="continuous">
+    <origin xyz="0 0.004 0.16" rpy="0 0 0"/>
+    <parent link="gimbal_yaw"/>
+    <child link="gimbal_pitch"/>
+    <axis xyz="0 1 0" />
+    <limit effort="150" lower="${-PI/4}" upper="0.5625" velocity="${2*PI}"/>
+  </joint>
+  <link name="gimbal_pitch">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <inertial>
+      <origin xyz="0.02 0 0" rpy="0 0 0"/>
+      <mass value="0.5"/>
+      <inertia
+        ixx="0.0007541666666666668" 
+        ixy="0" 
+        ixz="0"
+        iyy="0.0030208333333333337" 
+        iyz="0"
+        izz="0.0029416666666666666"/>
+    </inertial>			
+    <visual >
+      <geometry>
+         <mesh filename="package://rmua_bot_description/meshes/gimbal_pitch.dae" />
+      </geometry>
+    </visual>
+    <collision name="collision_main">
+      <origin xyz="0.015 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.1 0.0915 0.08"/>
+      </geometry>
+    </collision>
+    <collision name="collision_box">
+      <origin xyz="-0.011 0 0.043" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.14801 0.07 0.065"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- camera -->
+  <xacro:macro name="Box_inertial_matrix" params="m l w h">
+    <inertial>
+      <mass value="${m}" />
+        <inertia ixx="${m*(h*h + l*l)/12}" ixy = "0" ixz = "0"
+          iyy="${m*(w*w + l*l)/12}" iyz= "0"
+          izz="${m*(w*w + h*h)/12}" />
+    </inertial>
+  </xacro:macro>
+
+  <xacro:property name="camera_m" value="0.1" />
+  <xacro:property name="camera_length" value="0.02" />
+  <xacro:property name="camera_width" value="0.08" />
+  <xacro:property name="camera_height" value="0.035" />
+
+  <!-- camera1 -->
+
+  <link name="camera1">
+    <visual>
+      <geometry>
+        <box size="${camera_length} ${camera_width} ${camera_height}" />
+      </geometry>
+      <origin xyz="0.1 -0.02 0.03" rpy="0.0 0.0 0.0" />
+    </visual>
+    <collision>
+      <geometry>
+        <box size="${camera_length} ${camera_width} ${camera_height}" />
+      </geometry>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+    </collision>
+    <xacro:Box_inertial_matrix m="${camera_m}" l="${camera_length}" w="${camera_width}" h="${camera_height}" />
+  </link>
+
+  <joint name="camera1_gimbal_yaw" type="fixed">
+    <parent link="gimbal_yaw" />
+    <child link="camera1" />
+    <origin xyz="0.1 -0.02 0.03" />
+  </joint>
+
+  <xacro:include filename="camera1.xacro" />
+
+  <!-- camera2 -->
+
+  <link name="camera2">
+    <visual>
+      <geometry>
+        <box size="${camera_length} ${camera_width} ${camera_height}" />
+      </geometry>
+      <origin xyz="0.1 0.02 0.03" rpy="0.0 0.0 0.0" />
+    </visual>
+    <collision>
+      <geometry>
+        <box size="${camera_length} ${camera_width} ${camera_height}" />
+      </geometry>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+    </collision>
+    <xacro:Box_inertial_matrix m="${camera_m}" l="${camera_length}" w="${camera_width}" h="${camera_height}" />
+  </link>
+
+  <joint name="camera2_gimbal_yaw" type="fixed">
+    <parent link="gimbal_yaw" />
+    <child link="camera2" />
+    <origin xyz="0.1 0.02 0.03" />
+  </joint>
+
+  <xacro:include filename="camera2.xacro" />
+
+  <!-- laser -->
+  <xacro:macro name="sphere_inertial_matrix" params="m r">
+    <inertial>
+      <mass value="${m}" />
+      <inertia ixx="${2*m*r*r/5}" ixy="0" ixz="0"
+          iyy="${2*m*r*r/5}" iyz="0" 
+          izz="${2*m*r*r/5}" />
+    </inertial>
+  </xacro:macro>
+
+  <xacro:property name="laser_m" value="0.01" />
+  <xacro:property name="laser_radius" value="0.02" />
+
+  <link name="laser">
+    <visual>
+      <geometry>
+        <sphere radius="${laser_radius}"/>
+      </geometry>
+      <origin xyz="0.0 0 0.0" rpy="0 0 0" />
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="${laser_radius}"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </collision>
+    <xacro:sphere_inertial_matrix m="${laser_m}" r="${laser_radius}" />
+    </link>
+
+    <joint name="laser_chassis" type="fixed">
+      <parent link="chassis" />
+      <child link="laser" />
+      <origin xyz="0.05 0 0.15" />
+    </joint>
+
+  <xacro:include filename="laser.xacro" />
+
+  <!--armor modules-->
+  <xacro:include filename="$(find models_description)/urdf/rm22_armor_module/armor_module.xacro" />
+  <!--front armor module-->
+  <xacro:armor_module prefix="front"
+                                  parant="chassis"
+                                  xyz="0.197 0 0.061"
+                                  rpy="0 0 0"
+                                  sticker_num="num2_0"/>
+  <!--left armor module-->
+  <xacro:armor_module prefix="left"
+                                  parant="chassis"
+                                  xyz="0 0.116 0.061"
+                                  rpy="0 0 ${PI/2}"
+                                  sticker_num="num2_1"/>
+  <!--rear armor module-->
+  <xacro:armor_module prefix="rear"
+                                  parant="chassis"
+                                  xyz="-0.197 0 0.061"
+                                  rpy="0 0 ${PI}"
+                                  sticker_num="num2_2"/>
+  <!--right armor module-->
+  <xacro:armor_module prefix="right"
+                                  parant="chassis"
+                                  xyz="0 -0.116 0.061"
+                                  rpy="0 0 ${-PI/2}"
+                                  sticker_num="num2_3"/>
+ <!--light indicator module-->
+<xacro:include filename="$(find models_description)/urdf/rm21_light_indicator_module/light_indicator_module.xacro" />
+<xacro:light_indicator_module prefix=""
+                                  parant="chassis"
+                                  xyz="-0.207 0 0.1"
+                                  rpy="0 0 0" />
+
+ <!--speed monitor module-->
+<xacro:include filename="$(find models_description)/urdf/rm22_speed_monitor_module/speed_monitor_module_17mm.xacro" />
+<xacro:speed_monitor_module_17mm suffix=""
+                                  parant="gimbal_pitch"
+                                  xyz="0.07 0 0"
+                                  rpy="0 0 0" />
+
+<!--transmission -->
+<transmission name="tran1">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="gimbal_yaw_joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor_yaw">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+</transmission>
+
+<transmission name="tran2">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="gimbal_pitch_joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor_pitch">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+</transmission>
+
+
+<!-- Include controller plugin for Gazebo -->
+  <xacro:include filename="$(find rmua_bot_description)/urdf/nexus_4wd_mecanum.gazebo" />
+
+</robot>

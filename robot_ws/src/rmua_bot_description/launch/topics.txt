@@ -1,0 +1,73 @@
+luo@luo-ThinkPad-Edge-E540:~$ rostopic list
+/clock
+/cmd_vel
+/gazebo/link_states
+/gazebo/model_states
+/gazebo/parameter_descriptions
+/gazebo/parameter_updates
+/gazebo/set_link_state
+/gazebo/set_model_state
+/gazebo_gui/parameter_descriptions
+/gazebo_gui/parameter_updates
+/odom
+/rmua_robot/joint_states
+/rmua_robot/pitch_position_controller/command
+/rmua_robot/pitch_position_controller/pid/parameter_descriptions
+/rmua_robot/pitch_position_controller/pid/parameter_updates
+/rmua_robot/pitch_position_controller/state
+/rmua_robot/yaw_position_controller/command
+/rmua_robot/yaw_position_controller/pid/parameter_descriptions
+/rmua_robot/yaw_position_controller/pid/parameter_updates
+/rmua_robot/yaw_position_controller/state
+/rosout
+/rosout_agg
+luo@luo-ThinkPad-Edge-E540:~$ rostopic info /rmua_robot/pitch_position_controller/cmd
+ERROR: Unknown topic /rmua_robot/pitch_position_controller/cmd
+luo@luo-ThinkPad-Edge-E540:~$ rostopic info /rmua_robot/pitch_position_controller/command
+Type: std_msgs/Float64
+
+Publishers: None
+
+Subscribers: 
+ * /gazebo (http://luo-ThinkPad-Edge-E540:45713/)
+
+
+
+luo@luo-ThinkPad-Edge-E540:~$ rostopic pub -1  /rmua_robot/pitch_position_controller/command std_msgs/Float64 '{data: 1.5}'
+publishing and latching message for 3.0 seconds
+luo@luo-ThinkPad-Edge-E540:~$ rostopic pub -1  /rmua_robot/pitch_position_controller/command std_msgs/Float64 '{data: 0}'
+publishing and latching message for 3.0 seconds
+luo@luo-ThinkPad-Edge-E540:~$ rostopic pub -1  /rmua_robot/yaw_position_controller/command std_msgs/Float64 '{data: 1.0}'
+publishing and latching message for 3.0 seconds
+luo@luo-ThinkPad-Edge-E540:~$ rostopic pub -1 /cmd_vel geometry_msgs/Twist '{linear: {x: 0.1, y: 0, z: 0}, angular: {x: 0, y: 0, z: -0.5}}'
+publishing and latching message for 3.0 seconds
+luo@luo-ThinkPad-Edge-E540:~$ rostopic pub -1 /cmd_vel geometry_msgs/Twist '{linear: {x: 0.1, y: 0, z: 0}, angular: {x: 0, y: 0, z: -0.5}}'
+publishing and latching message for 3.0 seconds
+luo@luo-ThinkPad-Edge-E540:~$ rostopic pub -1 /cmd_vel geometry_msgs/Twist '{linear: {x: 1, y: 0, z: 0}, angular: {x: 0, y: 0, z: -0.0}}'
+publishing and latching message for 3.0 seconds
+luo@luo-ThinkPad-Edge-E540:~$ rostopic pub -1 /cmd_vel geometry_msgs/Twist '{linear: {x: 1, y: 1, z: 0}, angular: {x: 0, y: 0, z: -0.0}}'
+publishing and latching message for 3.0 seconds
+luo@luo-ThinkPad-Edge-E540:~$ rostopic pub -1 /cmd_vel geometry_msgs/Twist '{linear: {x: 1, y: 1, z: 0}, angular: {x: 0, y: 0, z: -0.0}}'
+publishing and latching message for 3.0 seconds
+luo@luo-ThinkPad-Edge-E540:~$ rostopic pub -1 /cmd_vel geometry_msgs/Twist '{linear: {x: 1, y: 3, z: 0}, angular: {x: 0, y: 0, z: -0.0}}'
+publishing and latching message for 3.0 seconds
+luo@luo-ThinkPad-Edge-E540:~$ rostopic pub -1 /cmd_vel geometry_msgs/Twist '{linear: {x: 1, y: 10, z: 0}, angular: {x: 0, y: 0, z: -0.0}}'
+publishing and latching message for 3.0 seconds
+luo@luo-ThinkPad-Edge-E540:~$ rostopic pub -1 /cmd_vel geometry_msgs/Twist '{linear: {x: 1, y: 50, z: 0}, angular: {x: 0, y: 0, z: -0.0}}'
+publishing and latching message for 3.0 seconds
+luo@luo-ThinkPad-Edge-E540:~$ rostopic pub -1 /cmd_vel geometry_msgs/Twist '{linear: {x: 1, y: 100, z: 0}, angular: {x: 0, y: 0, z: -0.0}}'
+publishing and latching message for 3.0 seconds
+luo@luo-ThinkPad-Edge-E540:~$ rostopic pub -1 /cmd_vel geometry_msgs/Twist '{linear: {x: 1, y: 500, z: 0}, angular: {x: 0, y: 0, z: -0.0}}'
+publishing and latching message for 3.0 seconds
+luo@luo-ThinkPad-Edge-E540:~$ rostopic pub -1 /cmd_vel geometry_msgs/Twist '{linear: {x: 1, y: 50, z: 0}, angular: {x: 0, y: 0, z: -0.0}}'
+publishing and latching message for 3.0 seconds
+luo@luo-ThinkPad-Edge-E540:~$ rostopic pub -1 /cmd_vel geometry_msgs/Twist '{linear: {x: 50, y: 50, z: 0}, angular: {x: 0, y: 0, z: -0.0}}'
+publishing and latching message for 3.0 seconds
+luo@luo-ThinkPad-Edge-E540:~$ rostopic pub -1 /cmd_vel geometry_msgs/Twist '{linear: {x: 50, y: 50, z: 0}, angular: {x: 0, y: 0, z: -0.0}}'
+publishing and latching message for 3.0 seconds
+luo@luo-ThinkPad-Edge-E540:~$ rostopic pub -1 /cmd_vel geometry_msgs/Twist '{linear: {x: 50, y: 50, z: 0}, angular: {x: 0, y: 0, z: -0.0}}'
+publishing and latching message for 3.0 seconds
+luo@luo-ThinkPad-Edge-E540:~$ rostopic pub -1 /cmd_vel geometry_msgs/Twist '{linear: {x: 50, y: 50, z: 0}, angular: {x: 0, y: 0, z: -1.0}}'
+publishing and latching message for 3.0 seconds
+
+
