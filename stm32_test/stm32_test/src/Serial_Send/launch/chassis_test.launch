@@ -1,0 +1,4 @@
+<launch>
+    <node pkg="Serial_Send" type="Serial_Send" name="Serial_Send" output="screen"/>
+    <node pkg="Serial_Send" type="topic_test" name="topic_test"/>
+</launch>

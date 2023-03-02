@@ -1,0 +1,2 @@
+Serial_Send
+-DCATKIN_DEVEL_PREFIX=/home/rmua/stm32_test/devel -DCMAKE_INSTALL_PREFIX=/home/rmua/stm32_test/install -G Unix Makefiles
