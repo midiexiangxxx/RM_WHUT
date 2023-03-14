@@ -535,6 +535,7 @@ CMakeFiles/Robo.dir/src/Robo.cpp.o
  .././include/Params.h
  .././include/Perspective.h
  /home/wutrm/Documents/Robo/src/Robo.cpp
+ /home/wutrm/Documents/Robo/src/serial_send.hpp
  /usr/include/CameraApi.h
  /usr/include/CameraDefine.h
  /usr/include/CameraStatus.h

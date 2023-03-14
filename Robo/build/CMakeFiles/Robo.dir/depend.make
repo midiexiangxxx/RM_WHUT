@@ -534,6 +534,7 @@ CMakeFiles/Robo.dir/src/Robo.cpp.o: .././include/LightBar.h
 CMakeFiles/Robo.dir/src/Robo.cpp.o: .././include/Params.h
 CMakeFiles/Robo.dir/src/Robo.cpp.o: .././include/Perspective.h
 CMakeFiles/Robo.dir/src/Robo.cpp.o: ../src/Robo.cpp
+CMakeFiles/Robo.dir/src/Robo.cpp.o: ../src/serial_send.hpp
 CMakeFiles/Robo.dir/src/Robo.cpp.o: /usr/include/CameraApi.h
 CMakeFiles/Robo.dir/src/Robo.cpp.o: /usr/include/CameraDefine.h
 CMakeFiles/Robo.dir/src/Robo.cpp.o: /usr/include/CameraStatus.h
