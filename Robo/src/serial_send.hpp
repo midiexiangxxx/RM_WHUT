@@ -3,9 +3,10 @@
 #include <unistd.h>
 #include <termios.h>
 #include <fcntl.h>
+#include<unistd.h>
 namespace sd{
 int fd;
-unsigned char Start_Byte[1];             //发送起始帧
+unsigned char Start_Byte[1] = {0xFF};             //发送起始帧
 unsigned char CRC_Data[8];               //发送缓冲区
 float Gimbal_Data[3];
 
@@ -49,11 +50,11 @@ void getModbusCRC16(unsigned char *_pBuf, unsigned short int _usLen)
 */
 void Float_To_Byte(float msg,int id)
 {
-    int temp_int = 1000 * msg;
+    short temp_int = 1000 * msg;
     unsigned char *Byte = (unsigned char *)&temp_int;
     for(int i=0;i<2;i++)
     {
-	    CRC_Data[2 * (id - 1) + i] = Byte[1 - i];
+	CRC_Data[2 * (id - 1) + i] = Byte[1 - i];
     }
     return;
 }
@@ -88,12 +89,15 @@ void send()
     //发送数据
     write(fd,Start_Byte,1);
     int len = write(fd,CRC_Data,8);
+    usleep(10000);
+    //sleep(1);
+    printf("\n%d %d\n",CRC_Data[0],CRC_Data[1]);
     if (len < 0)
     {
-		printf("write data error \n");
-	}
+  	printf("write data error \n");
+    }
     //关闭串口
-    printf("$$$$$SENDED$$$$$%f   %f   %f",Gimbal_Data[0],Gimbal_Data[1],Gimbal_Data[2]);
+    printf("$$$$$SENDED$$$$$%.2f   %.2f   %.2f\n",Gimbal_Data[0],Gimbal_Data[1],Gimbal_Data[2]);
     close(fd);
 }
 }

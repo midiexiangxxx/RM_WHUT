@@ -12,7 +12,8 @@
 #include <tuple>
 #include "serial_send.hpp"
 #define OFFSET_BETWEEN_GUN_CAM 0
-#define THRESHOLD1 5.7
+#define THRESHOLD1 70
+#define ARMOR_REAL_WIDTH 55.5
 // #include <opencv2/highgui.hpp>
 // #include <cvcam>
 using namespace cv;
@@ -53,10 +54,18 @@ inline double get2pointDis(const T& p1, const T& p2){
 
 template <typename T1,typename T2>
 inline std::pair<double,double> getCenterOffset(const T1&&p,const T2&&c){
+    cout << "p.x-c.x,c.y-p.y" << p.x-c.x << " " << c.y-p.y<< endl;
     return std::make_pair(p.x-c.x,c.y-p.y);
 }
 
-int main() {
+template<typename T>
+float getLinearScale(const T& p0,const T& p1)
+{
+    return static_cast<float>(ARMOR_REAL_WIDTH/get2pointDis(p0,p1));
+}
+
+
+int main(int argc,char** argv) {
     cout << "Hello, World!" << endl;
 
     int                     iCameraCounts = 1;
@@ -81,6 +90,7 @@ int main() {
     cout <<hCamera<<endl;
     //没有连接设备
     if(iCameraCounts==0){
+	cout<<"return -1"<<endl;
         return -1;
     }
 
@@ -169,12 +179,14 @@ int main() {
 
                 Mat imageParams = Mat(armor.corners);
                 const auto p0 = armor.corners[0];
+                cv::circle(frame,cv::Point(armor.corners[0]),1,cv::Scalar(0,255,0),3);
                 const auto p1 = armor.corners[1];
+                // cv::circle(frame,p1,1,cv::Scalar(255,255,0),3);
                 const auto p2 = armor.corners[2];
                 const auto p3 = armor.corners[3];
                 const auto dis1 = get2pointDis(p0,p3);
-                const auto dis2 = get2pointDis(p1,p2);
-                if(::abs(dis1-dis2)>THRESHOLD1) {cout <<"FUCK****FUCK"<<dis1-dis2<<"FUCK****FUCK"<<endl; continue;}
+                const auto dis2 = get2pointDis(p0,p2);
+                if(::abs(dis1-dis2)>THRESHOLD1) {cout <<"OVER THRESHOLD  "<<dis1-dis2<<endl; continue;}
                 //cout<<"**********************"<<endl;
                 //cout<<dis1-dis2<<endl;
                 //cout<<"**********************"<<endl;
@@ -201,9 +213,13 @@ int main() {
                 ,0.5);
                 cout<<"!!!!!!!!!!!!!!!!!!!!!"<<endl;
                 cout<<u<<endl<<depth<<endl<<v<<endl;
-                sd::Gimbal_Data[0] = u/1000;
+                const auto temp = getLinearScale(std::move(cv::Point(armor.corners[0])),std::move(cv::Point(armor.corners[1])));
+                sd::Gimbal_Data[0] = u*temp*1.5;
+                // sd::Gimbal_Data[0] = u*[&p0,&p1](){
+                //     return 55.5/get2pointDis(p0,p1);
+                // }
                 sd::Gimbal_Data[1] = depth/1000;
-                sd::Gimbal_Data[2] = v/1000;
+                sd::Gimbal_Data[2] = v*temp*1.5;
                 }
             }
             lightBarBlobs.clear();

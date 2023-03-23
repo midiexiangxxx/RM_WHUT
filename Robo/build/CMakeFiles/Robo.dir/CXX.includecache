@@ -107,6 +107,8 @@ termios.h
 -
 fcntl.h
 -
+unistd.h
+-
 
 /usr/include/CameraApi.h
 CameraDefine.h
