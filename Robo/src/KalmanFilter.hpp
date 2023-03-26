@@ -14,8 +14,8 @@ public:
 
     ~KalmanFilter();
 
-    KalmanFilter(cVxdMove x_in,cVxdMove p_in,cVxdMove f_in,cVxdMove u_in,cVxdMove q_in,cVxdMove h_in,cVxdMove r_in,)
-        :  x(x_in),f(f_in),p(p_in),h(h_in),u(u_in),q(q_in),r(r_in),is_initialized(true){};
+    KalmanFilter(cVxdMove x_in,cVxdMove p_in,cVxdMove f_in,cVxdMove u_in,cVxdMove q_in,cVxdMove h_in,cVxdMove r_in): 
+     x(x_in),f(f_in),p(p_in),h(h_in),u(u_in),q(q_in),r(r_in),is_initialized(true){};
 
     inline Eigen::VectorXd GetX() const{
         return this->x;
@@ -23,18 +23,18 @@ public:
 
     void Estimate(){
         this->x = this->f * this->x;
-        Eigen::MatrixXd Ft = f.transpose();
+        Eigen::MatrixXd Ft = this->f.transpose();
         p = f * p * Ft + q;
     }
 
     void MeasurementUpdate(const Eigen:: VectorXd&& z){
-        Eigen::VectorXd y = z - h * x;
+        Eigen::VectorXd y = z - h * this->x;
         Eigen::MatrixXd S = h * p * h.transpose() + r;
         // Kalman Gain
         Eigen::MatrixXd K = p * h.transpose() * S.inverse();
         // estimate state vector
         x = x + K * y;
-        int _sz = x.size;
+        int _sz = this->x.size();
         Eigen::Matrix2Xd I = Eigen::MatrixXd::Identity(_sz, _sz);
         // update state covariance matrix
         p = (I - K * h) * p;
