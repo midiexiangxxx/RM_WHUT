@@ -4,7 +4,7 @@
 
 #include "TRTModule.hpp"
 #include <fstream>
-#include <filesystem>
+#include <experimental/filesystem>
 #include <logger.h>
 #include <cuda.h>
 #include <cuda_runtime_api.h>
@@ -80,10 +80,10 @@ constexpr float sigmoid(float x) {
 }
 
 TRTModule::TRTModule(const std::string &onnx_file) {
-    std::filesystem::path onnx_file_path(onnx_file);
+    std::experimental::filesystem::path onnx_file_path(onnx_file);
     auto cache_file_path = onnx_file_path;
     cache_file_path.replace_extension("cache");
-    if (std::filesystem::exists(cache_file_path)) {
+    if (std::experimental::filesystem::exists(cache_file_path)) {
         build_engine_from_cache(cache_file_path.c_str());
     } else {
         build_engine_from_onnx(onnx_file_path.c_str());
@@ -167,6 +167,7 @@ void TRTModule::build_engine_from_cache(const std::string &cache_file) {
     TRT_ASSERT(runtime != nullptr);
     TRT_ASSERT((engine = runtime->deserializeCudaEngine(buffer.get(), sz)) != nullptr);
     runtime->destroy();
+	std::cout << "[INFO: ENGINE BUILT]\n";
 }
 
 void TRTModule::cache_engine(const std::string &cache_file) {

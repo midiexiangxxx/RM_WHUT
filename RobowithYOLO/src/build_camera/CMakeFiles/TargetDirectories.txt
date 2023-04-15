@@ -1,0 +1,3 @@
+/home/rmua/RobowithYOLO/src/build_camera/CMakeFiles/ZED_Camera_Control.dir
+/home/rmua/RobowithYOLO/src/build_camera/CMakeFiles/edit_cache.dir
+/home/rmua/RobowithYOLO/src/build_camera/CMakeFiles/rebuild_cache.dir

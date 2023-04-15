@@ -1,7 +1,7 @@
 //
 // Created by xinyang on 2021/4/8.
 //
-
+// #pragma once
 #ifndef _ONNXTRTMODULE_HPP_
 #define _ONNXTRTMODULE_HPP_
 
@@ -14,8 +14,8 @@ struct alignas(4) bbox_t {
     int color_id; // 0: blue, 1: red, 2: gray
     int tag_id;   // 0: guard, 1-5: number, 6: base
 
-    bool operator==(const bbox_t&) const = default;
-    bool operator!=(const bbox_t&) const = default;
+    // bool operator==(const bbox_t&) const = default;
+    // bool operator!=(const bbox_t&) const = default;
 };
 
 /*

@@ -4,7 +4,11 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${workspaceFolder}/include"
+                "${workspaceFolder}/include",
+                "/usr/include/**",
+                "./include",
+                "/usr/src/tensorrt/**",
+                "/usr/include/opencv4/opencv2"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/clang",

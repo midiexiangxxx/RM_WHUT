@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = -DGFLAGS_IS_A_DLL=0
 
-CXX_INCLUDES = -I/home/wutrm/Documents/RobowithYOLO/./include -I/usr/src/tensorrt/samples/common -I/usr/local/cuda-10.2/include -isystem /usr/include/opencv4 -isystem /usr/include/eigen3
+CXX_INCLUDES = -I/home/rmua/RobowithYOLO/./include -I/usr/src/tensorrt/samples/common -I/usr/local/cuda/include -I/usr/local/zed/include -isystem /usr/include/opencv4 -isystem /usr/include/eigen3
 
-CXX_FLAGS =  -O0 -std=gnu++20
+CXX_FLAGS =  -O0 -std=gnu++1z
 
