@@ -1,0 +1,8 @@
+prefix=/home/rmua/roborts_ws/install
+
+Name: serial_send
+Description: Description of serial_send
+Version: 0.0.0
+Cflags: -I${prefix}/include
+Libs: -L${prefix}/lib 
+Requires: roscpp rospy serial std_msgs message_runtime

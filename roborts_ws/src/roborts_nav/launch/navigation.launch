@@ -1,0 +1,11 @@
+<launch>
+  <master auto="start"/>
+  <!-- Run the robot base(laser and base and odom tf...) -->
+  <include file="$(find roborts_bringup)/launch/base.launch" />
+  <!-- map -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find roborts_nav)/maps/602.yaml"/>
+  <!-- amcl -->
+  <include file="$(find roborts_localization)/launch/amcl.launch" />
+  <!-- move_base -->
+  <include file="$(find roborts_nav)/launch/move_base.launch" />
+  </launch>

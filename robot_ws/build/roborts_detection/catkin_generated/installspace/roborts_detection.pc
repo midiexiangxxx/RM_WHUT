@@ -1,8 +1,0 @@
-prefix=/home/wk/robot_ws/install
-
-Name: roborts_detection
-Description: Description of roborts_detection
-Version: 1.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 

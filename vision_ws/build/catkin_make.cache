@@ -1,0 +1,2 @@
+RobowithYOLO
+-DCATKIN_DEVEL_PREFIX=/home/rmua/vision_ws/devel -DCMAKE_INSTALL_PREFIX=/home/rmua/vision_ws/install -G Unix Makefiles

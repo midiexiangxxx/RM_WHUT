@@ -1,1 +1,0 @@
-set(ORDERED_PATHS "/home/wk/robot_ws/devel/include;/home/wk/robot_ws/src/roborts_common/include;/home/wk/robot_ws/src/roborts_costmap/include")

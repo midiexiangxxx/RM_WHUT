@@ -1,0 +1,23 @@
+<launch>
+  <!-- <master auto="start"/> -->
+  <!-- <rosparam command="load" file="$(find roborts_base)/config/roborts_base_parameter.yaml" /> -->
+
+  <!-- Run the Base Node -->
+  <!-- <node pkg="roborts_base" type="roborts_base_node" name="roborts_base_node" output="screen" respawn="true" /> -->
+
+
+  <!-- laser and base -->
+  <include file="$(find rplidar_ros)/launch/rplidar.launch"/>
+  <include file="$(find serial_send)/launch/test.launch"/>
+  
+
+  <!-- urdf and something static tf-->
+  <!-- <node pkg="joint_state_publisher" name="joint_state_publisher" type="joint_state_publisher" />
+  <node pkg="robot_state_publisher" name="robot_state_publisher" type="robot_state_publisher" /> -->
+  <!-- <param name="robot_description" command="$(find xacro)/xacro inorder $(find rmua_bot_description)/urdf/rmua_robot.xacro" /> -->
+  <include file="$(find roborts_bringup)/launch/static_tf.launch"/>
+  <!-- rviz -->
+  <!-- <node pkg="rviz" type="rviz" name="rviz"  args="-d $(find rmua_bot_description)/config/rmua.rviz" /> -->
+   
+</launch>
+

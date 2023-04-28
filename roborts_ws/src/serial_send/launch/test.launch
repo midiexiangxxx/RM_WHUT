@@ -1,0 +1,6 @@
+<launch>
+    <node pkg="serial_send" type="Serial_Send" name="Serial_Send" />
+    <node pkg="serial_send" type="Serial_Receive" name="Serial_Receive" />
+    <node pkg="serial_send" type="topic_test" name="topic_test"  />
+    <node pkg="serial_send" type="sub_msg" name="sub_msg" output="screen" />
+</launch>

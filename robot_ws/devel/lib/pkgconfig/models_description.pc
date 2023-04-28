@@ -1,8 +1,0 @@
-prefix=/home/wk/robot_ws/devel
-
-Name: models_description
-Description: Description of models_description
-Version: 1.2.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 

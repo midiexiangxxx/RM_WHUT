@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+	<param name="robot_description" command="$(find xacro)/xacro --inorder $(find rmua_bot_description)/urdf/rmua_robot.xacro" />
+    <!--param name="robot_description" command="$(find xacro)/xacro -1-inorder $(find mbot_description)/urdf/xacro/gazebo/mbot_with_laser_gazebo.xacro" /-->
+    <!--node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" /-->
+</launch>
+

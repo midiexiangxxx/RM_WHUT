@@ -1,0 +1,24 @@
+hcp_opt {
+    enable_homotopy_class_planning: True                 #enable_homotopy_class_planning:  #激活并行规划（因为一次优化多个轨迹，占用更多的CPU资源
+    enable_multithreading: True                           #enable_multithreading: True #激活多个线程，以便在不同的线程中规划每个轨迹 
+    simple_exploration: False
+    max_number_classes: 4                                 #max_number_classes: 考虑到的不同轨迹的最大数量  
+    selection_obst_cost_scale: 1.0                        #selection_obst_cost_scale: 1.0 #障碍物成本      
+    selection_prefer_initial_plan: 0.5 
+    selection_viapoint_cost_scale: 1.0
+    selection_cost_hysteresis: 0.9                        #selection_cost_hysteresis: 1.0 #轨迹成本
+    selection_alternative_time_cost: False                #selection_alternative_time_cost: False #如果为真，时间成本(时间差平方和)被总转移时间(时间差和)所替代。
+    roadmap_graph_no_samples: 15                          #roadmap_graph_no_samples: 15 #指定为创建路线图而生成的样本数
+    roadmap_graph_area_width: 5                           #roadmap_graph_no_samples: 15 #指定为创建路线图而生成的样本数
+    roadmap_graph_area_length_scale: 1.2
+    h_signature_prescaler: 0.5                          #h_signature_prescaler: 0.5 #（0.2 < value <= 1）缩放用于区分同伦类的内部参数（H-signature）。
+                                                         #警告：只能减少此参数，如果在局部costmap中遇到太多障碍物的情况，请勿选择极低值
+                                                           #，否则无法将障碍物彼此区分开线缩放用于区#分同伦类的内部参数（H-signature）。
+    h_signature_threshold: 0.1                          #h_signature_threshold: 0.1 #如果实部和复部的差都低于规定的阈值，则假定两个h签名相等。
+    obstacle_keypoint_offset: 0.1                      
+    obstacle_heading_threshold: 0.45                        #obstacle_heading_threshold: 0.45 #指定障碍标头和目标标头之间的标量积的值，以便将(障碍)考虑到勘探中
+    viapoints_all_candidates: True                  #viapoints_all_candidates (bool, default: true) 如果为真，
+                                                      #则不同拓扑的所有轨迹都附加到这组vio -points上，否则只有共享与初始/全局计划相同拓扑的轨迹与它们连接  
+    visualize_hc_graph: False                    #visualize_hc_graph: False #可视化创建的图形，用于探索不同的轨迹（在rviz中检查标记消息）
+}
+
