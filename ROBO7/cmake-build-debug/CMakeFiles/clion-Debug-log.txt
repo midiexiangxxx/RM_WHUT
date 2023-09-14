@@ -1,0 +1,30 @@
+/home/lbh/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/232.9559.58/bin/cmake/linux/x64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/home/lbh/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/232.9559.58/bin/ninja/linux/x64/ninja -G Ninja -S /home/lbh/CLionProjects/ROBO7 -B /home/lbh/CLionProjects/ROBO7/cmake-build-debug
+-- The C compiler identification is GNU 7.3.0
+-- The CXX compiler identification is GNU 7.3.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+-- Looking for pthread_create in pthreads
+-- Looking for pthread_create in pthreads - not found
+-- Looking for pthread_create in pthread
+-- Looking for pthread_create in pthread - found
+-- Found Threads: TRUE  
+-- Found CUDA: /usr/local/cuda (found suitable exact version "11.8") 
+-- Found OpenCV: /usr/local (found version "4.5.5") 
+-- OpenCV library status:
+--     config: /usr/local/lib/cmake/opencv4
+--     version: 4.5.5
+--     libraries: opencv_calib3d;opencv_core;opencv_cudev;opencv_dnn;opencv_features2d;opencv_flann;opencv_gapi;opencv_highgui;opencv_imgcodecs;opencv_imgproc;opencv_ml;opencv_objdetect;opencv_photo;opencv_stitching;opencv_video;opencv_videoio
+--     include path: /usr/local/include/opencv4
+-- Configuring done (5.9s)
+-- Generating done (0.1s)
+-- Build files have been written to: /home/lbh/CLionProjects/ROBO7/cmake-build-debug

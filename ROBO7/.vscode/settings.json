@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "*.txt": "cmake",
+        "*.ipp": "cpp",
+        "array": "cpp",
+        "any": "cpp",
+        "string_view": "cpp",
+        "ostream": "cpp"
+    }
+}
